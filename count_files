@@ -1,0 +1,25 @@
+#!/bin/bash 
+## this script used in an SMS server which has tow processes generate process and consume process 
+## the issue is when consuming processes less than 8 the process skipped and 8 the process fails 
+## if more than 8 the process consume the messages successfully 
+messages_path=""
+function count_files(){
+count_file_number=`ls $messages_path | wc -l`
+}
+flag="Not_valid"
+while[  $flag = "Not_valid" ] 
+do
+	generate_data ### this process generate sms files to path 
+	count_files 
+	if [ $count_file_number -gt 8 ]
+	then
+		echo number of files is more than 8 process_data will be triggered 
+		flag="valid"
+	else 
+		echo number of files is 8 or less .. the script will generate data again to reach the number 
+	fi 
+done 
+## calling count files function 
+count_files
+### calling consume data function 
+consume 
