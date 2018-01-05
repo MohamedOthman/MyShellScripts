@@ -37,6 +37,7 @@ function check_service(){
 		flag="False"
 	fi 
 	done 
+	
 }
 
 ### MAIN Script Starts Here 
